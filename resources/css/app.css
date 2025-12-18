@@ -145,8 +145,13 @@
 .landing-page, .login-page {
     position: relative;
     overflow: hidden;
+<<<<<<< HEAD
+
+    isolation: isolate; /* Helps with stacking if needed */
+=======
     background: var(--background);
     isolation: isolate;
+>>>>>>> upstream/main
 }
 
 <<<<<<< HEAD

@@ -1,6 +1,7 @@
-import { dashboard, login, register } from '@/routes';
+import { login } from '@/routes';
 import { type SharedData } from '@/types';
 import { Head, Link, usePage } from '@inertiajs/react';
+import Header from '@/components/header/header'
 
 export default function Welcome({
     canRegister = true,
@@ -25,20 +26,13 @@ export default function Welcome({
                     rel="stylesheet"
                 />
             </Head>
-            <main className="h-screen landing-page">
-                <div></div>
-                <header className="py-4 px-20 flex items-center gap-2">
-                    <img 
-                        src="/Logo/DILG-logo.png" 
-                        alt="DILG Logo" 
-                        className='h-10'
-                    />  
-                    <p className='font-bold text-lg'>DILG RSR</p>
-                </header>
+            <main className="landing-page h-screen">
 
-                <div className='flex items-center justify-center mt-20'>
-                    <section className='px-20 flex w-full'>
-                        <div className='flex w-full items-center justify-center '>
+                <Header />
+
+                <div className="mt-20 flex items-center justify-center">
+                    <section className="flex w-full px-20">
+                        <div className="flex w-full items-center justify-center">
                             {/* Headline and text */}
                             <div className='w-1/2 flex flex-col gap-2'>
                                 <div className=''>
@@ -49,7 +43,7 @@ export default function Welcome({
                                     </p>
                                     <h4 className="text-7xl font-extrabold text-blue-600 dark:text-foreground">{ headline }</h4>
                                 </div>
-                                
+
                                 <div>
                                     <p className='text-base my-3 text-gray-700 dark:text-neutral-300'>{ description }</p>
                                     <Link 
@@ -57,25 +51,24 @@ export default function Welcome({
                                         href={login()}
                                     >
                                         Login
-                                        <img 
-                                            src="/Icons/sign-in-fill.svg" 
+                                        <img
+                                            src="/Icons/sign-in-fill.svg"
                                             alt="Login Icon"
-                                            className='h-5' 
+                                            className="h-5"
                                         />
                                     </Link>
                                 </div>
                             </div>
 
                             {/* Logo */}
-                            <div className='w-1/2 flex'>
-                                <img 
-                                    src="/Logo/DILG-logo.png" 
-                                    alt="DILG Logo" 
-                                    className='h-[450px] mx-auto'
-                                />  
+                            <div className="flex w-1/2">
+                                <img
+                                    src="/Logo/DILG-logo.png"
+                                    alt="DILG Logo"
+                                    className="mx-auto h-[450px]"
+                                />
                             </div>
-                        </div>  
-                        
+                        </div>
                     </section>
                 </div>
             </main>

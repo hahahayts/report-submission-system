@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\ReportSubmission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
+use SebastianBergmann\CodeCoverage\Report\Xml\Report;
 
 class ReportSubmissionController extends Controller
 {
@@ -56,4 +58,35 @@ class ReportSubmissionController extends Controller
 
         return redirect()->back()->with('success', 'Report submitted successfully.');
     }
+
+
+    public function updateStatus(Request $request, ReportSubmission $reportSubmission)
+    {
+        $request->validate([
+            'status' => [
+                'required',
+                'string',
+                Rule::in(['accepted', 'returned']),
+            ],
+            'remarks' => [
+                Rule::requiredIf($request->status === 'returned'),
+                'nullable',
+                'string',
+            ],
+        ]);
+
+        $data = [
+            'status' => $request->status,
+        ];
+
+        if ($request->status === 'returned') {
+            $data['remarks'] = $request->remarks;
+        }
+
+        $reportSubmission->update($data);
+
+        return redirect()->back()->with('success', 'Report Submission Updated Successfully');
+    }
+
+
 }

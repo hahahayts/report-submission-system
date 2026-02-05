@@ -85,6 +85,7 @@ export interface Media {
     original_url: string;
 }
 
+// Add to types/index.d.ts
 export interface ReportSubmission {
     id: string;
     report_id: string;
@@ -97,8 +98,10 @@ export interface ReportSubmission {
     remarks: string;
     description: string
 
-    report?: Report;
-    field_officer?: User;
+    // Relationships
+    fieldOfficer?: Pick<User, 'id' | 'name' | 'email' | 'avatar'>;
+    media?: Media[];
+    report?: Report; // Added report relationship
 }
 
 export interface LaravelPaginator<T> {
@@ -120,3 +123,5 @@ export interface LaravelPaginator<T> {
     to: number | null;
     total: number;
 }
+
+export type FilterType = 'all' | 'pending' | 'rejected' | 'accepted';

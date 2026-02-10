@@ -1,0 +1,65 @@
+import ViewController from '@/actions/App/Http/Controllers/FocalPerson/ViewController';
+import AppLayout from '@/layouts/app-layout';
+import { breadcrumbs } from '@/pages/focal-person/dashboard/page';
+import { Program, Report, ReportSubmission } from '@/types';
+import { Link, usePage } from '@inertiajs/react';
+import { EllipsisVertical, Folder } from 'lucide-react';
+import { Activity } from 'react';
+
+export default function page() {
+    const { report, reportSubmissions, program } = usePage<{
+        report: Report;
+        reportSubmissions: ReportSubmission[];
+        program: Program;
+    }>().props;
+
+    return (
+        <AppLayout breadcrumbs={breadcrumbs}>
+            <div className="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4">
+                <div className="flex items-center justify-between">
+                    <Link href={ViewController.reports(program)}>Back</Link>
+                    <h1 className="text-xl font-semibold">{report.title}</h1>
+                </div>
+
+                <Activity
+                    mode={reportSubmissions.length === 0 ? 'visible' : 'hidden'}
+                >
+                    No Submissions yet
+                </Activity>
+
+                <Activity
+                    mode={reportSubmissions.length > 0 ? 'visible' : 'hidden'}
+                >
+                    <div className="grid grid-cols-3 gap-5">
+                        {reportSubmissions.map((submission) => (
+                            <div
+                                key={submission.id}
+                                className="flex items-center gap-5 rounded-xl border bg-background/50 px-4 py-2"
+                            >
+                                <div>
+                                    <Folder />
+                                </div>
+                                <div className="flex w-full items-center justify-between">
+                                    <div>
+                                        <h2 className="truncate text-lg font-semibold">
+                                            {submission.field_officer?.name}
+                                        </h2>
+                                        <p className="text-sm text-muted-foreground">
+                                            Deadline:{' '}
+                                            {new Date(
+                                                submission.created_at,
+                                            ).toLocaleDateString()}
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <EllipsisVertical className="transition-colors hover:text-muted-foreground" />
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </Activity>
+            </div>
+        </AppLayout>
+    );
+}

@@ -39,5 +39,40 @@ export interface User {
     two_factor_enabled?: boolean;
     created_at: string;
     updated_at: string;
+    role: string;
     [key: string]: unknown; // This allows for additional properties...
+}
+
+export interface Program {
+    id: number;
+    name: string;
+    description: string;
+    coordinator: User;
+    created_at: string;
+    updated_at: string;
+}
+
+export interface Report {
+    id: string;
+    title: string;
+    description?: string;
+    program: Program<Pick<Program, 'id' | 'name' | 'description'>>;
+    created_by: User<Pick<User, 'id' | 'name' | 'email' | 'avatar'>>;
+    deadline: Date;
+    final_deadline: Date;
+    created_at: string;
+    updated_at: string;
+}
+
+
+export interface ReportSubmission {
+  id: string;
+  report_id: string;
+  field_officer_id: number;
+  status: 'draft' | 'submitted';
+  created_at: string;
+  updated_at: string;
+
+  report?: Report;
+  field_officer?: User;
 }

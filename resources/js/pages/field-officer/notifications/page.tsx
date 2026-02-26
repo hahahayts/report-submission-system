@@ -1,3 +1,4 @@
+import ViewController from '@/actions/App/Http/Controllers/FieldOfficer/ViewController';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head, usePage } from '@inertiajs/react';
@@ -6,12 +7,8 @@ import { useMemo, useState } from 'react';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Dashboard',
-        href: '/field-officer/dashboard',
-    },
-    {
         title: 'Notifications',
-        href: '/field-officer/notifications',
+        href: ViewController.notifications().url,
     },
 ];
 

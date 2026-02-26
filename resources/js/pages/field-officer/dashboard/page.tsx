@@ -5,7 +5,6 @@ import { type BreadcrumbItem } from '@/types';
 import { Link } from '@inertiajs/react';
 import {
   FileText,
-  ClipboardList,
   Calendar,
   Clock,
   CheckCircle2,
@@ -13,9 +12,6 @@ import {
   XCircle,
   Upload,
   Download,
-  Eye,
-  Filter,
-  MoreHorizontal,
   Bell,
   ChevronRight,
   FolderOpen,
